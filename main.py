@@ -12,15 +12,14 @@ def load_content_items(content_strings):
     items.append(item)
 
   # sort in reverse chron order
-    items.sort(key=lambda x: x["data"],reverse=True)
+  items.sort(key=lambda x: x["date"],reverse=True)
+  return items
 
-    return items
+def load_templates(template_string):
+  return jinja2.Template(template_string)
 
-def load_templates():
-  pass
-
-def render_site(config, content, templates):
-  pass
+def render_site(config, content, template):
+  print(template.render(config=config, content=content))
 
 def main():
   config_string = """
@@ -28,7 +27,7 @@ def main():
   """
 
   content_strings = ["""
-                     title = "First Post
+                     title = "First Post"
                      date = 2021-12-12T12:00:00+01:00
                      +++++
 
@@ -41,10 +40,26 @@ def main():
 
                      Number two! <snigger>
                      """]
+
+  template_string = """
+  <!DOCTYPE html>
+  <html>
+    <body>
+      <h1>{{ config.title }}</h1>
+      {% for post in content %}
+      <article>
+        <h2>{{ post.title }}</h2>
+        <p>Posted at {{ post.date }}</p>
+        {{ post.content }}
+      </article>
+      {% endfor %}
+    </body>
+  </html>
+  """
   
   config = load_config(config_string)
   content = load_content_items(content_strings)
-  templates = load_templates()
+  templates = load_templates(template_string)
   render_site(config, content, templates)
 
 main()
