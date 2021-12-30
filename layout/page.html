@@ -5,8 +5,7 @@
     {{ macros.navigation(content.pages) }}
 <body>
     <h1>{{ this.title }}</h1>
-    <p>Posted at {{ this.date }}</p>
-    {{ this.content }}
-    <p><a href="{{ config. baseURL }}">Return to homepage &#10558;</a></p>  
+    {{this.content}}
+    <p><a href="{{ config.baseURL }}">Return to homepage &#10558;</a></p>
 </body>
 </html>
