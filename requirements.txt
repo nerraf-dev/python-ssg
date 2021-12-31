@@ -1,0 +1,7 @@
+importlib-metadata==4.10.0
+inflect==5.3.0
+Jinja2==3.0.3
+Markdown==3.3.6
+MarkupSafe==2.0.1
+toml==0.10.2
+zipp==3.7.0
